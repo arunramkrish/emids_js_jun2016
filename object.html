@@ -18,7 +18,12 @@
 	function LogConfig( param1, param2) {
 		this.level = (arguments.length) ? arguments[0] : "DEBUG-CONSTR";
 		this.msg = param2;
+        
 	}
+    LogConfig.prototype.toString = function() {
+            return this.level + " " + this.msg;
+        };
+
 	var logConfig4 = new LogConfig("ERROR", "error message");
 	var logConfig5 = LogConfig();
 	
@@ -33,9 +38,23 @@
 	//error -> printLogConfig(logConfig5);
 	printLogConfig(logConfig6);
 	
-
 	function printLogConfig(cfg) {
 		console.log(cfg.level + cfg.msg);
 	}
+    window.logger = (function(cfg) {
+        function Logger(config) {
+            this.config = config;
+            this.toString = function() {
+                return "I am a Logger";
+            }
+        }
+        return new Logger(cfg);
+    })(logConfig4);
+    
+    var myFunction = new Function('console.log("I am generated fn");');
+    myFunction();
+    
 </script>
+    
+    
 </html>

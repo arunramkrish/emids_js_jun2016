@@ -1,0 +1,25 @@
+<html>
+<head>
+</head>
+    <body>
+        <div id="logger">
+        </div>
+            <script type="text/javascript" src="logger.js">
+    </script>
+
+        <script>
+            var myobject = Object.create(new Object());
+            myobject.prop1 = "gtwetrge";
+            Object.getPrototypeOf(myobject).getContents = function() {
+                return this.prop1;
+            }
+            
+            var mySpclObject = Object.create(Object.create(myobject));
+            mySpclObject.extendProp = "I am added";
+            Object.getPrototypeOf(mySpclObject).getExtended = function() {
+                return this.extendProp;
+            }
+            
+        </script>
+    </body>
+</html>
