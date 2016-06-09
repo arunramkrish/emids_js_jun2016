@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+</head>
+<body>
+<div id="container"></div>
+<script>
+	var logConfig = {
+		level : "DEBUG"
+	};
+	
+	var logConfig2 = new Object();
+	logConfig2.level = "DEBUG"
+	
+	var logConfig3 = new Object();
+	logConfig3["level"] = "DEBUG"
+	
+	function LogConfig( param1, param2) {
+		this.level = (arguments.length) ? arguments[0] : "DEBUG-CONSTR";
+		this.msg = param2;
+	}
+	var logConfig4 = new LogConfig("ERROR", "error message");
+	var logConfig5 = LogConfig();
+	
+	var logConfig6 = new Object();
+	//LogConfig.call(logConfig6, "INFO", "test message");
+	LogConfig.apply(logConfig6, ["INFO", "test message"]);
+	
+	printLogConfig(logConfig);
+	printLogConfig(logConfig2);
+	printLogConfig(logConfig3);
+	printLogConfig(logConfig4);
+	//error -> printLogConfig(logConfig5);
+	printLogConfig(logConfig6);
+	
+
+	function printLogConfig(cfg) {
+		console.log(cfg.level + cfg.msg);
+	}
+</script>
+</html>

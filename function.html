@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+</head>
+<body>
+<div id="container"></div>
+<script>
+	function addHello() {
+		var container = document.getElementById("container");
+		var spanElement = document.createElement("span");
+		spanElement.innerHTML = "Hello timer";
+		
+		container.appendChild(spanElement);
+		
+		setTimeout(addHello, 1000);
+	}
+	//trial 1 - invoke function directly
+	//setTimeout(addHello, 1000);
+
+	function setupTimer() {
+		for (var i=0;i<10;i++) {
+			setTimeout(function(){
+				var container = document.getElementById("container");
+				var spanElement = document.createElement("span");
+				spanElement.innerHTML = "Hello timer " + i;
+			
+				container.appendChild(spanElement);
+			
+			}, 5000);
+		}
+	}
+	//trial 2 - invoke function with closure (shared)
+	//setupTimer();
+	(function() {
+		console.log("hello timer");
+	})();
+	
+	(function setupTimerWithCallback() {
+		for (var i=0;i<10;i++) {
+			setTimeout(createCallback(i), 5000);
+		}
+
+		function createCallback(index) {
+			return function(){
+					var container = document.getElementById("container");
+					var spanElement = document.createElement("span");
+					spanElement.innerHTML = "Hello timer " + index;
+				
+					container.appendChild(spanElement);
+				
+				};
+		}
+	})();
+</script>
+</body>
+</html>
