@@ -1,0 +1,23 @@
+<html><head><script type="text/javascript" src="myquery.js"></script></head>
+    <body>
+        <h1>AJAX using MyQuery</h1>
+        <div id="result">
+        </div>
+    <script>
+        "use strict"
+        function onResult(data) {
+            document.getElementById("result").innerHTML = data.message;
+        }
+        try {
+            $.ajax({
+                "method":"GET",
+                "url": "sample.json",
+                "onSuccess": onResult
+            });
+        }catch(e) {
+            //e.message="new msg";
+            console.log(`Error occurred ${e}`);
+        }
+    </script>
+    </body>
+</html>
